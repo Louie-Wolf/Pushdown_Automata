@@ -3,12 +3,29 @@
  */
 package pushdown_automata;
 
+import pushdown_automata.more1than0.Q0;
+import pushdown_automata.more1than0.Q1;
+import pushdown_automata.more1than0.Q2;
+
+import java.util.Stack;
+
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
+    public static void main(String[] args) {
+        if (run("101011001")){
+            System.out.println("Accepted");
+        } else {
+            System.out.println("Rejected");
+        }
     }
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+    public static boolean run(String word){
+        Stack<String> stack = new Stack<>();
+        Q0 q0 = new Q0("q0", stack, null, null);
+        Q1 q1 = new Q1("q1", stack, q0, null);
+        Q2 q2 = new Q2("q2", stack, q1);
+        q0.setStates(q1, q2);
+        q1.setStates(q2);
+
+        return q0.changeToState(word);
     }
 }

@@ -4,11 +4,20 @@
 package pushdown_automata;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AppTest {
-    @Test void appHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull(classUnderTest.getGreeting(), "app should have a greeting");
+    @ParameterizedTest
+    @ValueSource(strings = {"1111000", "11100", "111", "110", "10101100101"})
+    void correctInputs(String word) {
+        assertTrue(App.run(word));
+    }
+    @ParameterizedTest
+    @ValueSource (strings = {"11000", "11100000", "111000000", "1110000000", "11100000000", "1001001001110"})
+    void incorrectInputs(String word) {
+        assertFalse(App.run(word));
     }
 }
