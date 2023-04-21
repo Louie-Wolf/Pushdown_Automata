@@ -13,6 +13,15 @@ public abstract class State {
 
     public abstract boolean changeToState(String leftWord);
 
+    protected boolean changeToNextState(State state, String leftWord){
+        System.out.println("Changing to " + state);
+        try {
+            return state.changeToState(leftWord.substring(1));
+        } catch (StringIndexOutOfBoundsException e){
+            return state.changeToState("");
+        }
+    }
+
     @Override
     public String toString() {
         return name;

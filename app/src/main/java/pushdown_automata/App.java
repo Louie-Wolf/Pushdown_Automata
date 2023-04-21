@@ -20,11 +20,12 @@ public class App {
 
     public static boolean run(String word){
         Stack<String> stack = new Stack<>();
-        Q0 q0 = new Q0("q0", stack, null, null);
-        Q1 q1 = new Q1("q1", stack, q0, null);
-        Q2 q2 = new Q2("q2", stack, q1);
+        Q0 q0 = new Q0("Q0", stack);
+        Q1 q1 = new Q1("Q1", stack);
+        Q2 q2 = new Q2("Q2", stack);
         q0.setStates(q1, q2);
-        q1.setStates(q2);
+        q1.setStates(q0, q2);
+        q2.setStates(q1);
 
         return q0.changeToState(word);
     }

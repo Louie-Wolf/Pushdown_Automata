@@ -4,9 +4,12 @@ import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class Q2 extends State{
-    private final Q1 q1;
-    public Q2(String name, Stack<String> stack, Q1 q1) {
+    private Q1 q1;
+    public Q2(String name, Stack<String> stack) {
         super(name, stack);
+    }
+
+    public void setStates(Q1 q1) {
         this.q1 = q1;
     }
 
@@ -27,20 +30,13 @@ public class Q2 extends State{
         }
 
         if (firstChar.equals("0") && poppedChar.equals("1")){
-            try {
-                return q1.changeToState(leftWord.substring(1));
-            } catch (StringIndexOutOfBoundsException e){
-                return q1.changeToState("");
-            }
+            return changeToNextState(q1, leftWord);
         } else if (firstChar.equals("1") && poppedChar.equals("1")){
             stack.push("1");
             stack.push("1");
-            try {
-                return changeToState(leftWord.substring(1));
-            } catch (StringIndexOutOfBoundsException e){
-                return changeToState("");
-            }
+            return changeToNextState(this, leftWord);
         } else {
+            System.out.println("Rejected");
             return false;
         }
     }

@@ -6,10 +6,8 @@ import java.util.Stack;
 public class Q0 extends State{
     private Q1 q1;
     private Q2 q2;
-    public Q0(String name, Stack<String> stack, Q1 q1, Q2 q2) {
+    public Q0(String name, Stack<String> stack) {
         super(name, stack);
-        this.q1 = q1;
-        this.q2 = q2;
     }
 
     public void setStates(Q1 q1, Q2 q2) {
@@ -35,41 +33,22 @@ public class Q0 extends State{
 
         if (firstChar.equals("0") && poppedChar.equals("$")){
             stack.push("0");
-            try {
-                return changeToState(leftWord.substring(1));
-            } catch (StringIndexOutOfBoundsException e){
-                return changeToState("");
-            }
+            return changeToNextState(this, leftWord);
         } else if (firstChar.equals("0") && poppedChar.equals("0")){
             stack.push("0");
             stack.push("0");
-            try {
-                return changeToState(leftWord.substring(1));
-            } catch (StringIndexOutOfBoundsException e){
-                return changeToState("");
-            }
+            return changeToNextState(this, leftWord);
         } else if (firstChar.equals("1") && poppedChar.equals("0")){
-            try {
-                return changeToState(leftWord.substring(1));
-            } catch (StringIndexOutOfBoundsException e){
-                return changeToState("");
-            }
+            return changeToNextState(this, leftWord);
         } else if (firstChar.equals("1") && poppedChar.equals("1")){
             stack.push("1");
             stack.push("1");
-            try {
-                return q1.changeToState(leftWord.substring(1));
-            } catch (StringIndexOutOfBoundsException e){
-                return q1.changeToState("");
-            }
+            return changeToNextState(q1, leftWord);
         } else if (firstChar.equals("1") && poppedChar.equals("$")){
             stack.push("1");
-            try {
-                return q2.changeToState(leftWord.substring(1));
-            } catch (StringIndexOutOfBoundsException e){
-                return q2.changeToState("");
-            }
+            return changeToNextState(q2, leftWord);
         } else {
+            System.out.println("Rejected");
             return false;
         }
     }
