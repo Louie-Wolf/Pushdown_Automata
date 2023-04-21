@@ -53,6 +53,9 @@ public class Q1 extends State{
         } else if (firstChar.equals("1") && poppedChar.equals("$")) {
             stack.push("1");
             return changeToNextState(this, leftWord);
+        } else if (firstChar.equals("0") && poppedChar.equals("$")) {
+            stack.push("0");
+            return changeToNextState(q0, leftWord);
         } else {
             System.out.println("Rejected");
             return false;

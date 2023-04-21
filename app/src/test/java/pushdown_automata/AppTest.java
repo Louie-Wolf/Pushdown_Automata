@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AppTest {
     @ParameterizedTest
     @ValueSource(strings = {"1111000", "11100", "111", "110", "10101100101",
-            "111000111000110011001010101", "0001000101111010110110101"})
+            "111000111000110011001010101", "0001000101111010110110101", "111111111100000000001", "1110000000000111111111100000000001111111111"})
     void correctInputs(String word) {
         assertTrue(App.run(word));
     }
